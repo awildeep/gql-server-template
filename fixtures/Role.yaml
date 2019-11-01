@@ -1,0 +1,8 @@
+entity: "Role"
+items:
+  roleUser:
+    name: "User"
+  roleAdmin:
+    name: "Admin"
+  roleApproved:
+    name: "Approved"

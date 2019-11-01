@@ -17,20 +17,41 @@ const apollo_server_express_1 = require("apollo-server-express");
 const express_1 = __importDefault(require("express"));
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
-const Hello_1 = __importDefault(require("./Resolvers/Hello"));
-const Register_1 = __importDefault(require("./Resolvers/User/Register"));
+const cors_1 = __importDefault(require("cors"));
+const EnvironmentConfig_1 = __importDefault(require("./EnvironmentConfig"));
+const Resolvers_1 = __importDefault(require("./Resolvers"));
+const express_jwt_1 = __importDefault(require("express-jwt"));
+const CustomAuthChecker_1 = __importDefault(require("./CustomAuthChecker"));
+const path = '/graphql';
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield typeorm_1.createConnection();
+    const connection = yield typeorm_1.createConnection();
     const schema = yield type_graphql_1.buildSchema({
-        resolvers: [Hello_1.default, Register_1.default]
+        resolvers: Resolvers_1.default,
+        authChecker: CustomAuthChecker_1.default
     });
     const apolloServer = new apollo_server_express_1.ApolloServer({
-        schema
+        schema,
+        context: ({ req }) => {
+            return {
+                req,
+                user: req.user,
+                connection
+            };
+        }
     });
     const app = express_1.default();
-    apolloServer.applyMiddleware({ app });
-    app.listen(4000, () => {
-        console.log('Server started on localhost:4000/graphql');
+    app.use(path, express_jwt_1.default({
+        secret: EnvironmentConfig_1.default.JWT_SECRET,
+        credentialsRequired: false,
+        algorithms: ['RS256'],
+    }));
+    app.use(cors_1.default({
+        credentials: true,
+        origin: EnvironmentConfig_1.default.CORS_DOMAIN,
+    }));
+    apolloServer.applyMiddleware({ app, path });
+    app.listen(EnvironmentConfig_1.default.PORT, () => {
+        console.log(`🚀 Server ready at http://localhost:${EnvironmentConfig_1.default.PORT}${apolloServer.graphqlPath}`);
     });
 });
 main();

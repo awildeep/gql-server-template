@@ -1,19 +1,20 @@
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, JoinTable, OneToMany} from "typeorm";
 import {ObjectType, Field, ID, Root} from "type-graphql";
+import {UserRole} from "./UserRole";
 
 @ObjectType()
-@Entity()
+@Entity({name: 'users'})
 export class User extends BaseEntity {
     @Field(()=> ID)
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn({name: 'user_id'})
+    userId: number;
 
     @Field()
-    @Column()
+    @Column({name: 'first_name'})
     firstName: string;
 
     @Field()
-    @Column()
+    @Column({name: 'last_name'})
     lastName: string;
 
     @Field()
@@ -22,7 +23,7 @@ export class User extends BaseEntity {
     }
 
     @Field()
-    @Column()
+    @Column({name: 'is_active'})
     isActive: boolean;
 
     @Column()
@@ -31,4 +32,9 @@ export class User extends BaseEntity {
     @Field()
     @Column("text", {unique: true})
     email: string;
+
+    @Field(()=> [UserRole], {nullable: true})
+    @OneToMany(() => UserRole, UserRole => UserRole.user)
+    @JoinTable()
+    userRoles:  UserRole[];
 }

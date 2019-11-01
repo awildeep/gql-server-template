@@ -6,7 +6,12 @@
   "username": "gsm",
   "password": "",
   "database": "typegraphql",
-  "synchronize": true,
+  "synchronize": false,
   "logging": true,
-  "entities": ["./src/Entity/*.*"]
+  "entities": ["./src/Entity/*.*"],
+  "migrationsTableName": "migrations",
+  "migrations": ["migration/*.*"],
+  "cli": {
+    "migrationsDir": "migration"
+  }
 }

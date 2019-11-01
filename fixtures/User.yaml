@@ -1,0 +1,26 @@
+entity: "User"
+items:
+    user0:
+        email: "awildee+admin@gmail.com"
+        firstName: "Greg+admin"
+        lastName: "Elliot"
+        password: ""
+        isActive: true
+    user1:
+        email: "awildee+approved@gmail.com"
+        firstName: "Greg+approved"
+        lastName: "Elliot"
+        password: ""
+        isActive: true
+    user2:
+        email: "awildee+user@gmail.com"
+        firstName: "Greg+user"
+        lastName: "Elliot"
+        password: ""
+        isActive: true
+    user3:
+        email: "awildee+inactive@gmail.com"
+        firstName: "Greg+user"
+        lastName: "Elliot"
+        password: ""
+        isActive: false

@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const type_graphql_1 = require("type-graphql");
+const UserRole_1 = require("./UserRole");
 let User = class User extends typeorm_1.BaseEntity {
     name(parent) {
         return `${parent.firstName} ${parent.lastName}`;
@@ -21,17 +22,17 @@ let User = class User extends typeorm_1.BaseEntity {
 };
 __decorate([
     type_graphql_1.Field(() => type_graphql_1.ID),
-    typeorm_1.PrimaryGeneratedColumn(),
+    typeorm_1.PrimaryGeneratedColumn({ name: 'user_id' }),
     __metadata("design:type", Number)
-], User.prototype, "id", void 0);
+], User.prototype, "userId", void 0);
 __decorate([
     type_graphql_1.Field(),
-    typeorm_1.Column(),
+    typeorm_1.Column({ name: 'first_name' }),
     __metadata("design:type", String)
 ], User.prototype, "firstName", void 0);
 __decorate([
     type_graphql_1.Field(),
-    typeorm_1.Column(),
+    typeorm_1.Column({ name: 'last_name' }),
     __metadata("design:type", String)
 ], User.prototype, "lastName", void 0);
 __decorate([
@@ -43,7 +44,7 @@ __decorate([
 ], User.prototype, "name", null);
 __decorate([
     type_graphql_1.Field(),
-    typeorm_1.Column(),
+    typeorm_1.Column({ name: 'is_active' }),
     __metadata("design:type", Boolean)
 ], User.prototype, "isActive", void 0);
 __decorate([
@@ -55,9 +56,15 @@ __decorate([
     typeorm_1.Column("text", { unique: true }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
+__decorate([
+    type_graphql_1.Field(() => [UserRole_1.UserRole], { nullable: true }),
+    typeorm_1.OneToMany(() => UserRole_1.UserRole, UserRole => UserRole.user),
+    typeorm_1.JoinTable(),
+    __metadata("design:type", Array)
+], User.prototype, "userRoles", void 0);
 User = __decorate([
     type_graphql_1.ObjectType(),
-    typeorm_1.Entity()
+    typeorm_1.Entity({ name: 'users' })
 ], User);
 exports.User = User;
 //# sourceMappingURL=User.js.map

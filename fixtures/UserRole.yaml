@@ -1,0 +1,20 @@
+entity: "UserRole"
+items:
+  userRole0:
+    user: "@user0"
+    role: "@roleUser"
+  userRole1:
+    user: "@user0"
+    role: "@roleAdmin"
+  userRole2:
+    user: "@user0"
+    role: "@roleApproved"
+  userRole3:
+    user: "@user1"
+    role: "@roleUser"
+  userRole4:
+    user: "@user1"
+    role: "@roleApproved"
+  userRole5:
+    user: "@user2"
+    role: "@roleUser"
