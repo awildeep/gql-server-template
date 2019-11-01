@@ -2,7 +2,7 @@ import {Authorized, Ctx, Mutation, Resolver} from "type-graphql";
 import {User} from "../../Entity/User";
 import {Token} from "../../Entity/Token";
 import {JwtSign} from "../../JwtSign";
-import {MyContextType} from "../../types/MyContextType";
+import {MyContextType} from "../../Types/MyContextType";
 //  import EnvironmentConfig from "../../EnvironmentConfig";
 
 @Resolver()

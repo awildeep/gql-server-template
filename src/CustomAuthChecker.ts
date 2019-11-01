@@ -1,4 +1,4 @@
-import {MyContextType} from "./types/MyContextType";
+import {MyContextType} from "./Types/MyContextType";
 import {AuthChecker} from "type-graphql";
 import {Role} from "./Entity/Role";
 
@@ -15,7 +15,6 @@ const CustomAuthChecker: AuthChecker<MyContextType> =
         );
 
         const assignedRoles = assignedRolesObjects.map((a: Role) => a.name);
-
 
         for(let i =0; i< roles.length; i++) {
             if (!assignedRoles.includes(roles[i])) {
