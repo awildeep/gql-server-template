@@ -10,7 +10,7 @@ export class Role extends BaseEntity {
     roleId: number;
 
     @Field()
-    @Column()
+    @Column({unique: true})
     name: string;
 
     @Field(()=> [UserRole], {nullable: true})
