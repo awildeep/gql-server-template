@@ -1,12 +1,12 @@
-##install deps
+## install deps
 
     yarn install
     
-##Configure ormconfig
+## Configure ormconfig
 
 adjust to use the proper DB settings
 
-##generate a JWT signing key pair
+## generate a JWT signing key pair
 
     ssh-keygen -t rsa -b 4096 -m PEM -f jwtRS256.key
  
