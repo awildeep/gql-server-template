@@ -14,8 +14,6 @@ const CustomAuthChecker: AuthChecker<MyContextType> =
             [context.user.userId]
         );
 
-        console.log ('here');
-
         const assignedRoles = assignedRolesObjects.map((a: Role) => a.name);
 
         for(let i =0; i< roles.length; i++) {
