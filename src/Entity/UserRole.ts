@@ -13,10 +13,12 @@ export class UserRole extends BaseEntity {
     @Field(()=> User)
     @ManyToOne(() => User, user => user.userRoles)
     @JoinColumn({ name: "user_id"})
-    user: Promise<User>;
+    user: User;
 
     @Field(()=> Role)
-    @ManyToOne(() => Role, role => role.roleUsers)
+    @ManyToOne(() => Role, role => role.roleUsers, {
+        eager: true
+    })
     @JoinColumn({ name: "role_id"})
-    role: Promise<Role>;
+    role?: Role;
 }

@@ -8,6 +8,7 @@ import GenerateTokens from "../../GenerateTokens";
 @Resolver()
 class LoginResolver {
 
+
     @Mutation(()=>Token)
     async login(
         @Arg('input') {

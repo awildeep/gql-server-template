@@ -34,7 +34,9 @@ export class User extends BaseEntity {
     email: string;
 
     @Field(()=> [UserRole], {nullable: true})
-    @OneToMany(() => UserRole, UserRole => UserRole.user)
+    @OneToMany(() => UserRole, UserRole => UserRole.user, {
+        eager: true
+    })
     @JoinTable()
-    userRoles:  Promise<UserRole[]>;
+    userRoles?:  UserRole[];
 }
