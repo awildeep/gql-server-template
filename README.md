@@ -14,6 +14,17 @@ NOTE: Don't add passphrase
 
     openssl rsa -in jwtRS256.key -pubout -outform PEM -out jwtRS256.key.pub
 
+## setup db
+
+Edit ormconfig.json to your specs
+
+Create tables:
+
+    yarn run typeorm migration:run
+    
+Run fixtures (optional):
+
+    yarn run fixtures
 
 ## start in dev mode /w watcher
 
