@@ -1,4 +1,4 @@
-import HelloResolver from "./Hello";
+import HelloResolver from "./Hello/Hello";
 import RegisterResolver from "./User/Register";
 import LoginResolver from "./User/Login";
 import MeResolver from "./User/Me";

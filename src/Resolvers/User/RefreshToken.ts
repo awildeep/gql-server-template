@@ -1,36 +1,51 @@
-import {Authorized, Ctx, Mutation, Resolver} from "type-graphql";
+import {Arg, Mutation, Resolver} from "type-graphql";
 import {User} from "../../Entity/User";
 import {Token} from "../../Entity/Token";
-import {JwtSign} from "../../JwtSign";
-import {MyContextType} from "../../Types/MyContextType";
-//  import EnvironmentConfig from "../../EnvironmentConfig";
+import jwt from 'jsonwebtoken';
+import GenerateTokens from "../../GenerateTokens";
+import {RefreshTokenInput} from "./RefreshToken/RefreshTokenInput";
+import EnvironmentConfig from "../../EnvironmentConfig";
+import {Jwt} from "../../JwtSign";
 
 @Resolver()
 class RefreshTokenResolver {
+    errMsg = `Invalid refresh token`;
+    async checkJwtPayload (decoded: Jwt) {
+        if (decoded.type !== 'refresh') {
+            throw(new Error(this.errMsg));
+        }
+    }
+    async findUser (userId: number): Promise<User> {
+        const user = await User.findOne( userId);
+        if (!user) {
+            throw(new Error('User not found'));
+        }
+        return user;
+    }
 
-    @Authorized(['User'])
     @Mutation(()=>Token)
     async refreshToken(
-        @Ctx() ctx: MyContextType
+        @Arg('input') {
+            token
+        }: RefreshTokenInput
     ): Promise<Token> {
 
-        console.log('ctx.user.userId', ctx.user.userId);
+        try {
+            const decoded = jwt.verify(token, EnvironmentConfig.JWT_SECRET, { issuer: EnvironmentConfig.JWT_ISSUER, algorithms: ['RS256']});
+            await this.checkJwtPayload((<Jwt>decoded));
 
+            const user = await this.findUser((<Jwt>decoded).userId);
 
-        const errorMessage = `Invalid email or password`;
+            const newToken  = new Token();
+            const {accessToken, refreshToken} = GenerateTokens(user);
+            newToken.accessToken = accessToken;
+            newToken.refreshToken = refreshToken;
+            newToken.user = user;
 
-        const user = await User.findOne({where:{email: "bob+3@loblaw.com"}});
-        if (!user) {
-            throw(new Error(errorMessage));
+            return newToken;
+        } catch(err) {
+            throw(new Error(this.errMsg));
         }
-
-
-        const token  = new Token();
-        token.accessToken = JwtSign(user, 'access');
-        token.refreshToken = JwtSign(user, 'refresh');
-        token.user = user;
-
-        return token;
     }
 }
 

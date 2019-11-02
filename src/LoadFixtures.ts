@@ -29,7 +29,7 @@ const loadFixtures = async (fixturesPath: string) => {
     }
 };
 
-loadFixtures('./fixtures')
+loadFixtures('./src/fixtures')
     .then(() => {
         console.log('Fixtures are successfully loaded.');
     })

@@ -10,13 +10,13 @@ export class UserRole extends BaseEntity {
     @PrimaryGeneratedColumn({name: 'user_role_id'})
     userRoleId: number;
 
-    @Field(()=> ID)
+    @Field(()=> User)
     @ManyToOne(() => User, user => user.userRoles)
     @JoinColumn({ name: "user_id"})
-    user: User;
+    user: Promise<User>;
 
-    @Field(()=> ID)
+    @Field(()=> Role)
     @ManyToOne(() => Role, role => role.roleUsers)
     @JoinColumn({ name: "role_id"})
-    role: Role;
+    role: Promise<Role>;
 }

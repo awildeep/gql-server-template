@@ -8,6 +8,7 @@ interface EnvironmentConfigInterface {
     PORT                             : string,
     JWT_SECRET_FILE                  : string,
     JWT_SECRET                       : string,
+    JWT_ISSUER                       : string,
     GQL_AUTH_TOKEN_NAME              : string,
     CORS_DOMAIN                      : string,
 }
@@ -36,6 +37,7 @@ const setup = (): EnvironmentConfigInterface => {
         PORT                             : process.env.PORT || '3000',
         JWT_SECRET                       : jwtSecret,
         JWT_SECRET_FILE                  : jwtSecretFile,
+        JWT_ISSUER                       : process.env.JWT_ISSUER || 'typegraphql-test-app-issuer',
         GQL_AUTH_TOKEN_NAME              : process.env.GQL_AUTH_TOKEN_NAME || 'authorization',
         CORS_DOMAIN                      : process.env.CORS_DOMAIN!
     })

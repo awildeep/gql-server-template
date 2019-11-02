@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import {User} from "../../Entity/User";
 import {LoginInput} from "./Login/LoginInput";
 import {Token} from "../../Entity/Token";
-import {JwtSign} from "../../JwtSign";
+import GenerateTokens from "../../GenerateTokens";
 
 @Resolver()
 class LoginResolver {
@@ -28,8 +28,9 @@ class LoginResolver {
         }
 
         const token  = new Token();
-        token.accessToken = JwtSign(user, 'access');
-        token.refreshToken = JwtSign(user, 'refresh');
+        const {accessToken, refreshToken} = GenerateTokens(user);
+        token.accessToken = accessToken;
+        token.refreshToken = refreshToken;
         token.user = user;
 
         return token;

@@ -10,8 +10,8 @@
   "logging": true,
   "entities": ["./src/Entity/*.*"],
   "migrationsTableName": "migrations",
-  "migrations": ["migration/*.*"],
+  "migrations": ["src/migration/*.*"],
   "cli": {
-    "migrationsDir": "migration"
+    "migrationsDir": "src/migration"
   }
 }
