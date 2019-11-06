@@ -1,6 +1,6 @@
 import {Arg, Mutation, Resolver} from "type-graphql";
 import {User} from "../../Entity/User";
-import {ConfirmationLink} from "../../Entity/ConfirmationLink";
+import {UserToken} from "../../Entity/UserToken";
 import {LessThan} from "typeorm";
 import { format } from "date-fns";
 
@@ -10,7 +10,7 @@ class ConfirmUserResolver {
     async ConfirmUser(
         @Arg('token') token: string
     ): Promise<Boolean> {
-        const confirmationLink = await ConfirmationLink.findOneOrFail({where: {token, expiry: (date: Date) => LessThan(format(date, 'YYYY-MM-DD HH:MM:SS'))}})
+        const confirmationLink = await UserToken.findOneOrFail({where: {token, expiry: (date: Date) => LessThan(format(date, 'YYYY-MM-DD HH:MM:SS'))}})
         const user = await User.findOneOrFail(confirmationLink.user.userId);
 
         if (!user.confirmed) {

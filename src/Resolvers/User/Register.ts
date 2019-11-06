@@ -35,7 +35,7 @@ class RegisterResolver {
         await SendMail(VerifyEmail(
             email,
             'testmailer@test.com',
-            CreateConfirmationUrl(user)
+            CreateConfirmationUrl(user, 'user/confirm')
         ));
 
         return user;

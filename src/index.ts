@@ -5,7 +5,6 @@ import {buildSchema} from "type-graphql";
 import {createConnection} from "typeorm";
 import cors from "cors";
 import EnvironmentConfig from "./EnvironmentConfig";
-import resolvers from "./Resolvers";
 import jwt from "express-jwt";
 import CustomAuthChecker from "./CustomAuthChecker";
 
@@ -15,7 +14,7 @@ const main = async () => {
     const connection = await createConnection();
 
     const schema = await buildSchema({
-        resolvers,
+        resolvers: [__dirname + '/Resolvers/**/*.ts'],
         authChecker: CustomAuthChecker
     });
 

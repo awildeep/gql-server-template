@@ -1,15 +1,13 @@
 import {Arg, Mutation, Resolver} from "type-graphql";
 import {User} from "../../Entity/User";
 import {Token} from "../../Entity/Token";
-import {ConfirmationLink} from "../../Entity/ConfirmationLink";
+import {UserToken} from "../../Entity/UserToken";
 import {SendMail} from "../../SendMail";
 import {VerifyEmail} from "../../Email/VerifyEmail";
 import {CreateConfirmationUrl} from "../../CreateConfirmationUrl";
 
 @Resolver()
 class ConfirmResendResolver {
-
-
     @Mutation(()=>Token)
     async ConfirmResend(
         @Arg('input') email: string
@@ -21,14 +19,14 @@ class ConfirmResendResolver {
             throw('User already confirmed.');
         }
 
-        await ConfirmationLink.delete({
+        await UserToken.delete({
             user
         });
 
         await SendMail(VerifyEmail(
             email,
             'testmailer@test.com',
-            CreateConfirmationUrl(user)
+            CreateConfirmationUrl(user, 'user/confirm')
         ));
 
         return true;

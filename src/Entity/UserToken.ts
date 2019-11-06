@@ -1,10 +1,10 @@
 import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne, JoinColumn} from "typeorm";
 import {User} from "./User";
 
-@Entity({name: 'confirmation_link'})
-export class ConfirmationLink extends BaseEntity {
-    @PrimaryGeneratedColumn({name: 'confirmation_link_id'})
-    confirmationLinkId: number;
+@Entity({name: 'user_token'})
+export class UserToken extends BaseEntity {
+    @PrimaryGeneratedColumn({name: 'user_token_id'})
+    userTokenId: number;
 
     @Column('timestamp', {default: new Date()})
     expiry: Date;
