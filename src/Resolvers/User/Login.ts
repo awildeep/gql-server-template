@@ -25,6 +25,10 @@ class LoginResolver {
             throw(new Error(errorMessage));
         }
 
+        if (!user.confirmed) {
+            throw(new Error(`User is not confirmed.  Please check your email. Or request a new link via ConfirmResend()`));
+        }
+
         const token  = new Token();
         const {accessToken, refreshToken} = GenerateTokens(user);
         token.accessToken = accessToken;

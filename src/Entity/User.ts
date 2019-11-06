@@ -1,6 +1,7 @@
 import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, JoinTable, OneToMany} from "typeorm";
 import {ObjectType, Field, ID, Root} from "type-graphql";
 import {UserRole} from "./UserRole";
+import {Min} from "class-validator";
 
 @ObjectType()
 @Entity({name: 'users'})
@@ -27,6 +28,7 @@ export class User extends BaseEntity {
     isActive: boolean;
 
     @Column()
+    @Min(5)
     password: string;
 
     @Field()
@@ -37,6 +39,10 @@ export class User extends BaseEntity {
     @OneToMany(() => UserRole, UserRole => UserRole.user, {
         eager: true
     })
+
     @JoinTable()
     userRoles?:  UserRole[];
+
+    @Column('bool', {default: false})
+    confirmed: boolean;
 }

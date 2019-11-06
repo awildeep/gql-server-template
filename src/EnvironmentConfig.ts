@@ -11,6 +11,12 @@ interface EnvironmentConfigInterface {
     JWT_ISSUER                       : string,
     GQL_AUTH_TOKEN_NAME              : string,
     CORS_DOMAIN                      : string,
+    SMTP_HOST                        : string,
+    SMTP_PORT                        : number,
+    SMTP_IS_SECURE                   : boolean,
+    SMTP_USERNAME                    : string,
+    SMTP_PASSWORD                    : string,
+    SMTP_TEST_MODE                   : boolean,
 }
 
 const setup = (): EnvironmentConfigInterface => {
@@ -31,7 +37,6 @@ const setup = (): EnvironmentConfigInterface => {
         throw(new Error('CORS_DOMAIN has an incorrect value'))
     }
 
-
     return ({
         NODE_ENV                         : process.env.NODE_ENV || 'development',
         PORT                             : process.env.PORT || '3000',
@@ -39,7 +44,13 @@ const setup = (): EnvironmentConfigInterface => {
         JWT_SECRET_FILE                  : jwtSecretFile,
         JWT_ISSUER                       : process.env.JWT_ISSUER || 'typegraphql-test-app-issuer',
         GQL_AUTH_TOKEN_NAME              : process.env.GQL_AUTH_TOKEN_NAME || 'authorization',
-        CORS_DOMAIN                      : process.env.CORS_DOMAIN!
+        CORS_DOMAIN                      : process.env.CORS_DOMAIN!,
+        SMTP_HOST                        : process.env.SMTP_HOST || 'smtp.ethereal.email',
+        SMTP_PORT                        : Number(process.env.SMTP_HOST) ||587,
+        SMTP_IS_SECURE                   : Boolean(process.env.SMTP_HOST) || false,
+        SMTP_USERNAME                    : process.env.SMTP_USERNAME || '',
+        SMTP_PASSWORD                    : process.env.SMTP_PASSWORD || '',
+        SMTP_TEST_MODE                   : Boolean(process.env.SMTP_TEST_MODE) || true,
     })
 };
 
