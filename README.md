@@ -1,3 +1,20 @@
+# Playground for making GQL APIs
+
+I wanted to play around with:
+
+- typegraphql (https://typegraphql.ml)
+- typeorm (https://typeorm.io)
+- jwt
+
+This is purely a toy, and not intended to be production code.
+
+## requirements
+
+- PostgreSQL (tested version 11.5)
+- node (tested version v11.14.0)
+- yarn (tested version v1.19.1)
+- openssl  (tested with LibreSSL 2.6.5)
+
 ## install deps
 
     yarn install
