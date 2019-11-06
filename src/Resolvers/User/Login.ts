@@ -1,7 +1,7 @@
 import {Arg, Mutation, Resolver} from "type-graphql";
 import bcrypt from "bcryptjs";
 import {User} from "../../Entity/User";
-import {LoginInput} from "./Login/LoginInput";
+import {LoginInput} from "./Input/LoginInput";
 import {Token} from "../../Entity/Token";
 import GenerateTokens from "../../GenerateTokens";
 

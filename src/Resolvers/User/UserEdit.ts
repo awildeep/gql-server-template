@@ -1,7 +1,7 @@
 import {Arg, Authorized, Mutation, Resolver} from "type-graphql";
 import bcrypt from "bcryptjs";
 import {User} from "../../Entity/User";
-import {UserEditInput} from "./UserEdit/UserEditInput";
+import {UserEditInput} from "./Input/UserEditInput";
 
 @Resolver()
 class UserEditResolver {

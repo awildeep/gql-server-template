@@ -1,5 +1,5 @@
 import {Arg, Authorized, Mutation, Resolver} from "type-graphql";
-import {UserRoleCreateInput} from "./UserRole/UserRoleCreateInput";
+import {UserRoleCreateInput} from "./Input/UserRoleCreateInput";
 import {UserRole} from "../../Entity/UserRole";
 import {User} from "../../Entity/User";
 import {Role} from "../../Entity/Role";

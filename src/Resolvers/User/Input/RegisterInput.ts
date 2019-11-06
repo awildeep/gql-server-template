@@ -1,6 +1,6 @@
 import { MinLength, Length, IsEmail} from "class-validator";
 import { Field, InputType} from "type-graphql";
-import {isEmailUsed} from "./isEmailUsed";
+import {isEmailUsed} from "../Validate/isEmailUsed";
 
 @InputType()
 export class RegisterInput {

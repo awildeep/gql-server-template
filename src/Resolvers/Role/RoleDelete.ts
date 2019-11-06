@@ -1,5 +1,5 @@
 import {Arg, Authorized, Mutation, Resolver} from "type-graphql";
-import {RoleDeleteInput} from "./RoleDelete/RoleDeleteInput";
+import {RoleDeleteInput} from "./Input/RoleDeleteInput";
 import {Role} from "../../Entity/Role";
 
 @Resolver()

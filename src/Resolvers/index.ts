@@ -14,24 +14,26 @@ import UserRoleDeleteResolver from "./User/UserRoleDelete";
 import RoleEditResolver from "./Role/RoleEdit";
 import ProfileEditResolver from "./User/ProfileEdit";
 import UserEditResolver from "./User/UserEdit";
+import EchoResolver from "./Echo/Echo";
 
 const Resolvers = [
+    EchoResolver,
+    HelloResolver,
+    LoginResolver,
     MeResolver,
     MyRolesResolver,
     ProfileEditResolver,
-    HelloResolver,
-    RegisterResolver,
-    LoginResolver,
     RefreshTokenResolver,
-    RoleListResolver,
+    RegisterResolver,
     RoleCreateResolver,
     RoleDeleteResolver,
     RoleEditResolver,
-    UserListResolver,
+    RoleListResolver,
     UserEditResolver,
-    UserRoleListResolver,
+    UserListResolver,
     UserRoleCreateResolver,
-    UserRoleDeleteResolver
+    UserRoleDeleteResolver,
+    UserRoleListResolver,
 ];
 
 export default Resolvers;

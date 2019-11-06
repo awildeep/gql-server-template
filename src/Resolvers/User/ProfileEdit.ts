@@ -1,7 +1,7 @@
 import {Arg, Authorized, Ctx, Mutation, Resolver} from "type-graphql";
 import bcrypt from "bcryptjs";
 import {User} from "../../Entity/User";
-import {ProfileEditInput} from "./ProfileEdit/ProfileEditInput";
+import {ProfileEditInput} from "./Input/ProfileEditInput";
 import {MyContextType} from "../../Types/MyContextType";
 
 @Resolver()

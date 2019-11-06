@@ -1,6 +1,6 @@
 import {Arg, Authorized, Query, Resolver} from "type-graphql";
 import {Role} from "../../Entity/Role";
-import {PaginationInput} from "../PaginationInput";
+import {PaginationInput} from "../Validate/PaginationInput";
 
 @Resolver()
 class RoleListResolver {

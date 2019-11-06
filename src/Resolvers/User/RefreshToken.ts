@@ -3,7 +3,7 @@ import {User} from "../../Entity/User";
 import {Token} from "../../Entity/Token";
 import jwt from 'jsonwebtoken';
 import GenerateTokens from "../../GenerateTokens";
-import {RefreshTokenInput} from "./RefreshToken/RefreshTokenInput";
+import {RefreshTokenInput} from "./Input/RefreshTokenInput";
 import EnvironmentConfig from "../../EnvironmentConfig";
 import {Jwt} from "../../JwtSign";
 

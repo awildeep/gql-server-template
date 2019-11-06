@@ -1,5 +1,5 @@
 import {Arg, Authorized, Query, Resolver} from "type-graphql";
-import {PaginationInput} from "../PaginationInput";
+import {PaginationInput} from "../Validate/PaginationInput";
 import {User} from "../../Entity/User";
 
 @Resolver()
