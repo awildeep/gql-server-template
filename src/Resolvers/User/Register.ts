@@ -6,7 +6,7 @@ import {RegisterInput} from "./Register/RegisterInput";
 @Resolver()
 class RegisterResolver {
     @Mutation(()=>User)
-    async register(
+    async Register(
         @Arg('input') {
             firstName,
             lastName,

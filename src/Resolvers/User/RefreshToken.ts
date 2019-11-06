@@ -16,15 +16,11 @@ class RefreshTokenResolver {
         }
     }
     async findUser (userId: number): Promise<User> {
-        const user = await User.findOne( userId);
-        if (!user) {
-            throw(new Error('User not found'));
-        }
-        return user;
+        return await User.findOneOrFail( userId);
     }
 
     @Mutation(()=>Token)
-    async refreshToken(
+    async RefreshToken(
         @Arg('input') {
             token
         }: RefreshTokenInput

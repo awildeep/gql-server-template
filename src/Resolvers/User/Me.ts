@@ -5,16 +5,14 @@ import {MyContextType} from "../../Types/MyContextType";
 @Resolver()
 class MeResolver {
     @Query(()=>User, {nullable: true})
-    async me(
+    async Me(
         @Ctx() ctx: MyContextType
-    ): Promise<User | undefined> {
+    ): Promise<User> {
         if (!ctx.req.session!.userId) {
             throw new Error('Session is invalid');
         }
-        return User.findOne(ctx.req.session!.userId);
+        return User.findOneOrFail(ctx.req.session!.userId);
     }
-
-
 }
 
 export default MeResolver;

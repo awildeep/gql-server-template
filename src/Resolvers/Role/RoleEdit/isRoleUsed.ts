@@ -1,23 +1,23 @@
 import {registerDecorator, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface} from "class-validator";
-import {User} from "../../../Entity/User";
+import {Role} from "../../../Entity/Role";
 
 @ValidatorConstraint({ async: true })
-export class isEmailUsedConstraint implements ValidatorConstraintInterface {
-    validate(email: any ) {
-        return User.findOne({where: {email}}).then(user => {
-            return !user;
+export class isRoleUsedConstraint implements ValidatorConstraintInterface {
+    validate(name: any ) {
+        return Role.findOne({where: {name}}).then(role => {
+            return !role;
         });
     }
 }
 
-export function isEmailUsed(validationOptions?: ValidationOptions) {
+export function isRoleUsed(validationOptions?: ValidationOptions) {
     return function (object: Object, propertyName: string) {
         registerDecorator({
             target: object.constructor,
             propertyName: propertyName,
             options: validationOptions,
             constraints: [],
-            validator: isEmailUsedConstraint
+            validator: isRoleUsedConstraint
         });
     };
 }
