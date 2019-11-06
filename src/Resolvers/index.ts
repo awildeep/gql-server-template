@@ -15,8 +15,12 @@ import RoleEditResolver from "./Role/RoleEdit";
 import ProfileEditResolver from "./User/ProfileEdit";
 import UserEditResolver from "./User/UserEdit";
 import EchoResolver from "./Echo/Echo";
+import ConfirmUserResolver from "./User/ConfirmUser";
+import ConfirmResendResolver from "./User/ConfirmResend";
 
 const Resolvers = [
+    ConfirmUserResolver,
+    ConfirmResendResolver,
     EchoResolver,
     HelloResolver,
     LoginResolver,

@@ -53,7 +53,7 @@ const main = async () => {
     apolloServer.applyMiddleware({ app, path });
 
     app.listen(EnvironmentConfig.PORT, () => {
-        console.log(`🚀 Server ready at http://localhost:${EnvironmentConfig.PORT}${apolloServer.graphqlPath}`);
+        console.log(`🚀 Server ready at ${EnvironmentConfig.CORS_DOMAIN}${apolloServer.graphqlPath}`);
     })
 };
 

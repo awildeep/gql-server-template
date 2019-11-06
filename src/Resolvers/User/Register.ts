@@ -2,6 +2,9 @@ import {Arg, Mutation, Resolver} from "type-graphql";
 import bcrypt from "bcryptjs";
 import {User} from "../../Entity/User";
 import {RegisterInput} from "./Input/RegisterInput";
+import {SendMail} from "../../SendMail";
+import {VerifyEmail} from "../../Email/VerifyEmail";
+import {CreateConfirmationUrl} from "../../CreateConfirmationUrl";
 
 @Resolver()
 class RegisterResolver {
@@ -28,6 +31,12 @@ class RegisterResolver {
 
         );
         await user.save();
+
+        await SendMail(VerifyEmail(
+            email,
+            'testmailer@test.com',
+            CreateConfirmationUrl(user)
+        ));
 
         return user;
     }

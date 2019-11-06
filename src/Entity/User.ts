@@ -37,6 +37,10 @@ export class User extends BaseEntity {
     @OneToMany(() => UserRole, UserRole => UserRole.user, {
         eager: true
     })
+
     @JoinTable()
     userRoles?:  UserRole[];
+
+    @Column('bool', {default: false})
+    confirmed: boolean;
 }
