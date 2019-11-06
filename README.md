@@ -19,7 +19,7 @@ __NOTE__: Don't add passphrase
 
 ## setup db
 
-Edit ormconfig.json to your specs
+Edit `ormconfig.json` to your specs, see orm `ormconfig.json.sample` for an outline.
 
 Create tables:
 
