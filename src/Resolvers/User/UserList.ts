@@ -1,9 +1,10 @@
-import {Arg, Query, Resolver} from "type-graphql";
+import {Arg, Authorized, Query, Resolver} from "type-graphql";
 import {PaginationInput} from "../PaginationInput";
 import {User} from "../../Entity/User";
 
 @Resolver()
 class UserListResolver {
+    @Authorized(['User'])
     @Query(()=>[User], {nullable: true})
     async UserList(
         @Arg('input') {

@@ -1,16 +1,19 @@
 ## install deps
 
     yarn install
-    
-## Configure ormconfig
-
-adjust to use the proper DB settings
 
 ## generate a JWT signing key pair
 
+JWT requires a secret key for signing, and a public key for verification
+
+### Generate private key: 
+
     ssh-keygen -t rsa -b 4096 -m PEM -f jwtRS256.key
  
-NOTE: Don't add passphrase
+__NOTE__: Don't add passphrase
+
+
+### Generate public key: 
 
     openssl rsa -in jwtRS256.key -pubout -outform PEM -out jwtRS256.key.pub
 

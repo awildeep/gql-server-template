@@ -1,9 +1,10 @@
-import {Arg, Query, Resolver} from "type-graphql";
+import {Arg, Authorized, Query, Resolver} from "type-graphql";
 import {Role} from "../../Entity/Role";
 import {PaginationInput} from "../PaginationInput";
 
 @Resolver()
 class RoleListResolver {
+    @Authorized(['User'])
     @Query(()=>[Role], {nullable: true})
     async RoleList(
         @Arg('input') {
