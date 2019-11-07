@@ -1,25 +1,19 @@
 import "reflect-metadata";
 import {ApolloServer} from 'apollo-server-express';
 import Express from 'express';
-import {buildSchema} from "type-graphql";
 import {createConnection} from "typeorm";
 import cors from "cors";
 import EnvironmentConfig from "./EnvironmentConfig";
 import jwt from "express-jwt";
-import CustomAuthChecker from "./CustomAuthChecker";
+import {Schema} from "./Schema";
 
 const path = '/graphql';
 
 const main = async () => {
     const connection = await createConnection();
 
-    const schema = await buildSchema({
-        resolvers: [__dirname + '/Resolvers/**/*.ts'],
-        authChecker: CustomAuthChecker
-    });
-
     const apolloServer = new ApolloServer({
-        schema,
+        schema: await Schema(),
         context: ({req}: any ) => {
             return {
                 req,

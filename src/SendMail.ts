@@ -21,14 +21,12 @@ export interface MailOptions {
 export async function SendMail(mailOptions: MailOptions) {
     let smtpUsername = EnvironmentConfig.SMTP_USERNAME;
     let smtpPassword = EnvironmentConfig.SMTP_PASSWORD;
-    if (EnvironmentConfig.SMTP_TEST_MODE) {
+
+    if (EnvironmentConfig.SMTP_TEST_MODE || EnvironmentConfig.NODE_ENV === 'test') {
         const testAccount = await nodemailer.createTestAccount();
         smtpUsername = testAccount.user;
         smtpPassword = testAccount.pass;
     }
-
-
-
 
     const transporter = nodemailer.createTransport({
         host: EnvironmentConfig.SMTP_HOST,
