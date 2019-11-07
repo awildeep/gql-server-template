@@ -47,10 +47,10 @@ const setup = (): EnvironmentConfigInterface => {
         CORS_DOMAIN                      : process.env.CORS_DOMAIN!,
         SMTP_HOST                        : process.env.SMTP_HOST || 'smtp.ethereal.email',
         SMTP_PORT                        : Number(process.env.SMTP_HOST) ||587,
-        SMTP_IS_SECURE                   : Boolean(process.env.SMTP_HOST) || false,
+        SMTP_IS_SECURE                   : (process.env.SMTP_HOST === 'true') ,
         SMTP_USERNAME                    : process.env.SMTP_USERNAME || '',
         SMTP_PASSWORD                    : process.env.SMTP_PASSWORD || '',
-        SMTP_TEST_MODE                   : Boolean(process.env.SMTP_TEST_MODE) || true,
+        SMTP_TEST_MODE                   : (process.env.SMTP_TEST_MODE === 'true'),
     })
 };
 

@@ -26,7 +26,7 @@ class ConfirmResendResolver {
         await SendMail(VerifyEmail(
             email,
             'testmailer@test.com',
-            CreateConfirmationUrl(user, 'user/confirm')
+            await CreateConfirmationUrl(user, 'user/confirm')
         ));
 
         return true;

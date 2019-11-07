@@ -6,7 +6,7 @@ export class UserToken extends BaseEntity {
     @PrimaryGeneratedColumn({name: 'user_token_id'})
     userTokenId: number;
 
-    @Column('timestamp', {default: new Date()})
+    @Column('timestamp')
     expiry: Date;
 
     @Column({unique: true})

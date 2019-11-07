@@ -17,26 +17,34 @@ class RegisterResolver {
             password
         }: RegisterInput,
 
-    ): Promise<User> {
-        const hashedPassword = await bcrypt.hash(password, 12);
+    ): Promise<User| null> {
+        let user = null;
+        try {
+            const hashedPassword = await bcrypt.hash(password, 12);
 
-        const user = await User.create(
-            {
-                firstName,
-                lastName,
+            user = await User.create(
+                {
+                    firstName,
+                    lastName,
+                    email,
+                    isActive: true,
+                    password: hashedPassword
+                }
+
+            );
+            await user.save();
+
+            await SendMail(VerifyEmail(
                 email,
-                isActive: true,
-                password: hashedPassword
-            }
+                'testmailer@test.com',
+                await CreateConfirmationUrl(user, 'user/confirm')
+            ));
+            return user;
 
-        );
-        await user.save();
 
-        await SendMail(VerifyEmail(
-            email,
-            'testmailer@test.com',
-            CreateConfirmationUrl(user, 'user/confirm')
-        ));
+        } catch (e) {
+            console.log(e.message);
+        }
 
         return user;
     }

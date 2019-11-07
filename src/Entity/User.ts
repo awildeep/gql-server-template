@@ -43,6 +43,7 @@ export class User extends BaseEntity {
     @JoinTable()
     userRoles?:  UserRole[];
 
+
     @Column('bool', {default: false})
     confirmed: boolean;
 }
