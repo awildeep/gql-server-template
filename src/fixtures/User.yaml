@@ -7,6 +7,7 @@ items:
         #         testing
         password: "$2a$12$EFDhqdght9ZVu1UmUdOeQOOcmEP8dDXMkh3VxtVO7yZfo3rNi85mm"
         isActive: true
+        confirmed: true
     user1:
         email: "awildeep+approved@gmail.com"
         firstName: "Greg+approved"
@@ -14,6 +15,7 @@ items:
         #         testing
         password: "$2a$12$EFDhqdght9ZVu1UmUdOeQOOcmEP8dDXMkh3VxtVO7yZfo3rNi85mm"
         isActive: true
+        confirmed: true
     user2:
         email: "awildeep+user@gmail.com"
         firstName: "Greg+user"
@@ -21,6 +23,7 @@ items:
         #         testing
         password: "$2a$12$EFDhqdght9ZVu1UmUdOeQOOcmEP8dDXMkh3VxtVO7yZfo3rNi85mm"
         isActive: true
+        confirmed: true
     user3:
         email: "awildeep+inactive@gmail.com"
         firstName: "Greg+user"
@@ -28,3 +31,4 @@ items:
         #         testing
         password: "$2a$12$EFDhqdght9ZVu1UmUdOeQOOcmEP8dDXMkh3VxtVO7yZfo3rNi85mm"
         isActive: false
+        confirmed: true

@@ -15,6 +15,7 @@ const main = async () => {
     const apolloServer = new ApolloServer({
         schema: await Schema(),
         context: ({req}: any ) => {
+            console.log(req.user);
             return {
                 req,
                 user: req.user,

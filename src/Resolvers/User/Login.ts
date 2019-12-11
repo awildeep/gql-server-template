@@ -18,7 +18,7 @@ class LoginResolver {
     ): Promise<Token> {
         const errorMessage = `Invalid email or password`;
 
-        const user = await User.findOneOrFail({where:{email}});
+        const user = await User.findOneOrFail({where:{email, isActive: true}});
 
         const valid = await bcrypt.compare(password, user.password);
         if (!valid) {

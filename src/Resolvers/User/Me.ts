@@ -9,10 +9,9 @@ class MeResolver {
     async Me(
         @Ctx() ctx: MyContextType
     ): Promise<User> {
-        if (!ctx.req.session!.userId) {
-            throw new Error('Session is invalid');
-        }
-        return User.findOneOrFail(ctx.req.session!.userId);
+
+
+        return User.findOneOrFail(ctx.user!.userId);
     }
 }
 

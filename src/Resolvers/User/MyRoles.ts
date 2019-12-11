@@ -10,10 +10,7 @@ class MyRolesResolver {
     async MyRoles(
         @Ctx() ctx: MyContextType
     ): Promise<UserRole[] | undefined> {
-        if (!ctx.req.session!.userId) {
-            throw new Error('Session is invalid');
-        }
-        const user = await User.findOneOrFail(ctx.req.session!.userId, {});
+        const user = await User.findOneOrFail(ctx.user!.userId, {});
 
         return user.userRoles;
     }
