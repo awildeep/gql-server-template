@@ -13,7 +13,7 @@
       "test": "yarn run clear:dist && yarn run test:db:setup && yarn run test:db:fixtures && jest"
    },
    "dependencies": {
-      "apollo-server-express": "^2.9.7",
+      "apollo-server-express": "^2.14.2",
       "bcryptjs": "^2.4.3",
       "class-validator": "^0.10.2",
       "cors": "^2.8.5",
