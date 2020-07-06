@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import GenerateTokens from "../../GenerateTokens";
 import {RefreshTokenInput} from "./Input/RefreshTokenInput";
 import EnvironmentConfig from "../../EnvironmentConfig";
-import {Jwt} from "../../JwtSign";
+import { Jwt } from "../../JwtSign";
 
 @Resolver()
 class RefreshTokenResolver {
@@ -19,15 +19,10 @@ class RefreshTokenResolver {
         return await User.findOneOrFail( userId);
     }
 
-    @Mutation(()=>Token)
-    async RefreshToken(
-        @Arg('input') {
-            token
-        }: RefreshTokenInput
-    ): Promise<Token> {
-
+    @Mutation(returns => Token)
+    async RefreshToken(@Arg("refreshToken") refreshTokenInput: RefreshTokenInput): Promise<Token> {
         try {
-            const decoded = jwt.verify(token, EnvironmentConfig.JWT_SECRET, { issuer: EnvironmentConfig.JWT_ISSUER, algorithms: ['RS256']});
+            const decoded = jwt.verify(refreshTokenInput.token, EnvironmentConfig.JWT_SECRET, { issuer: EnvironmentConfig.JWT_ISSUER, algorithms: ['RS256']});
             await this.checkJwtPayload((<Jwt>decoded));
 
             const user = await this.findUser((<Jwt>decoded).userId);
@@ -43,6 +38,7 @@ class RefreshTokenResolver {
             throw(new Error(this.errMsg));
         }
     }
+
 }
 
 export default RefreshTokenResolver;

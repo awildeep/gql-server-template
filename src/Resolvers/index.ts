@@ -17,6 +17,7 @@ import UserEditResolver from "./User/UserEdit";
 import EchoResolver from "./Echo/Echo";
 import ConfirmUserResolver from "./User/ConfirmUser";
 import ConfirmResendResolver from "./User/ConfirmResend";
+import StatusResolver from "./Status/Status";
 
 const Resolvers = [
     ConfirmUserResolver,
@@ -38,6 +39,7 @@ const Resolvers = [
     UserRoleCreateResolver,
     UserRoleDeleteResolver,
     UserRoleListResolver,
+    StatusResolver,
 ];
 
 export default Resolvers;
