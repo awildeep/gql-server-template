@@ -5,6 +5,7 @@ import { UserToken } from '../../Entity/UserToken';
 import { SendMail } from '../../SendMail';
 import { VerifyEmail } from '../../Email/VerifyEmail';
 import { CreateConfirmationUrl } from '../../CreateConfirmationUrl';
+import EnvironmentConfig from '../../EnvironmentConfig';
 
 @Resolver()
 class ConfirmResendResolver {
@@ -20,7 +21,13 @@ class ConfirmResendResolver {
             user,
         });
 
-        await SendMail(VerifyEmail(email, 'testmailer@test.com', await CreateConfirmationUrl(user, 'user/confirm')));
+        await SendMail(
+            VerifyEmail(
+                email,
+                EnvironmentConfig.OUTBOUND_MAIL_FROM_ADDRESS,
+                await CreateConfirmationUrl(user, 'user/confirm'),
+            ),
+        );
 
         return true;
     }

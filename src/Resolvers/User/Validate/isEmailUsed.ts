@@ -8,17 +8,16 @@ import { User } from '../../../Entity/User';
 
 @ValidatorConstraint({ async: true })
 export class isEmailUsedConstraint implements ValidatorConstraintInterface {
-    validate(email: string): Promise<boolean | User> {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    validate(email: any): Promise<any> {
         return User.findOne({ where: { email } }).then((user) => {
             return !user;
         });
     }
 }
 
-export function isEmailUsed(
-    validationOptions?: ValidationOptions,
-): (object: { constructor: () => unknown }, propertyName: string) => void {
-    return function (object: { constructor: () => unknown }, propertyName: string) {
+export function isEmailUsed(validationOptions?: ValidationOptions): (object: Object, propertyName: string) => void {
+    return function (object: Object, propertyName: string) {
         registerDecorator({
             target: object.constructor,
             propertyName: propertyName,

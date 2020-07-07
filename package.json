@@ -10,7 +10,7 @@
       "clear:dist": "rm -Rf dist",
       "test:db:setup": "ts-node src/TestUtils/Setup.ts",
       "test:db:fixtures": "ts-node src/TestUtils/TestLoadFixtures.ts",
-      "test": "yarn run clear:dist && yarn run test:db:setup && yarn run test:db:fixtures && jest",
+      "test": "yarn run clear:dist && yarn run test:db:setup && yarn run test:db:fixtures && jest --detectOpenHandles",
       "pretty": "prettier --check \"./**/*.{js,ts,json}\"",
       "pretty:fix": "prettier --write \"./**/*.{js,ts,json}\"",
       "lint": "eslint . --ext=js,ts,json",

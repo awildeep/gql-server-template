@@ -7,11 +7,12 @@ interface Options {
     variableValues?: Maybe<{
         [key: string]: any;
     }>;
+    contextValue?: any;
 }
 
 let schema: GraphQLSchema;
 
-export const GraphqlCall = async ({ source, variableValues }: Options): Promise<any> => {
+export const GraphqlCall = async ({ source, variableValues, contextValue }: Options): Promise<any> => {
     if (!schema) {
         try {
             schema = await Schema();
@@ -23,5 +24,6 @@ export const GraphqlCall = async ({ source, variableValues }: Options): Promise<
         schema,
         source,
         variableValues,
+        contextValue,
     });
 };

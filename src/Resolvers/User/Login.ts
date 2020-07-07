@@ -10,9 +10,9 @@ class LoginResolver {
     @Mutation(() => Token)
     async Login(@Arg('input') { email, password }: LoginInput): Promise<Token> {
         const errorMessage = `Invalid email or password`;
-
-        const user = await User.findOneOrFail({ where: { email } });
-
+        const user = await User.findOneOrFail({ where: { email } }).catch((err) => {
+            throw new Error(errorMessage);
+        });
         const valid = await bcrypt.compare(password, user.password);
         if (!valid) {
             throw new Error(errorMessage);

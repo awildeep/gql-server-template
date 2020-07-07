@@ -3,6 +3,7 @@ import { User } from '../../Entity/User';
 import { SendMail } from '../../SendMail';
 import { CreateConfirmationUrl } from '../../CreateConfirmationUrl';
 import { ForgotPasswordEmail } from '../../Email/ForgotPasswordEmail';
+import EnvironmentConfig from '../../EnvironmentConfig';
 
 @Resolver()
 class ForgotPasswordResolver {
@@ -13,7 +14,7 @@ class ForgotPasswordResolver {
         await SendMail(
             ForgotPasswordEmail(
                 email,
-                'testmailer@test.com',
+                EnvironmentConfig.OUTBOUND_MAIL_FROM_ADDRESS,
                 await CreateConfirmationUrl(user, 'user/forgot-password'),
             ),
         );

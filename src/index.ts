@@ -12,7 +12,7 @@ import CustomAuthChecker from './CustomAuthChecker';
 import jsonwebtoken from 'jsonwebtoken';
 
 const graphqlEndpoint = '/graphql';
-const restEndpoint = '/api';
+// const restEndpoint = '/api';
 
 const main = async () => {
     const connection = await createConnection();

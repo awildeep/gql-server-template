@@ -52,7 +52,7 @@ export class User extends BaseEntity {
     @JoinTable()
     userRoles?: UserRole[];
 
-    @Field(() => User)
+    @Field(() => Organization)
     @ManyToOne(() => Organization, (Organization) => Organization.users)
     @JoinColumn({ name: 'organization_id' })
     organization: Organization;

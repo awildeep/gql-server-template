@@ -51,6 +51,7 @@ const setup = (): { [index: string]: any } => {
         SMTP_USERNAME: process.env.SMTP_USERNAME || '',
         SMTP_PASSWORD: process.env.SMTP_PASSWORD || '',
         SMTP_TEST_MODE: process.env.SMTP_TEST_MODE === 'true',
+        OUTBOUND_MAIL_FROM_ADDRESS: process.env.OUTBOUND_MAIL_FROM_ADDRESS || 'do.not.reply@domain.com',
     };
 };
 

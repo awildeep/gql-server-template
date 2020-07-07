@@ -4,7 +4,7 @@ import { Status } from '../../Entity/Status';
 @Resolver()
 class StatusResolver {
     @Query(() => Status, { name: 'status' })
-    async Status(): Promise<{ up: string }> {
+    async Status(): Promise<{ up: boolean }> {
         return {
             up: true,
         };

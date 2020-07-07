@@ -38,7 +38,10 @@ describe('Register', () => {
             lastName: faker.name.lastName(),
             email: faker.internet.email(),
             password: faker.internet.password(),
+            organization: 'testing',
         };
+
+        expect(newUser).toBeDefined();
 
         //Register the user via GQL
         const res = await GraphqlCall({
@@ -47,9 +50,11 @@ describe('Register', () => {
                 input: newUser,
             },
         });
+
+        //console.log(res);
+
         expect(res).toBeDefined();
         expect(res.data).toBeDefined();
-        //@ts-lint
         expect(res!.data!.Register).toBeDefined();
         expect(res!.data!.Register.firstName).toBe(newUser.firstName);
         expect(res!.data!.Register.lastName).toBe(newUser.lastName);

@@ -20,4 +20,8 @@ export class RegisterInput {
     @Field()
     @MinLength(7)
     password: string;
+
+    @Field()
+    @MinLength(1)
+    organization: string;
 }

@@ -19,5 +19,6 @@ module.exports = {
         '@typescript-eslint/no-var-requires': 'off',
         '@typescript-eslint/ban-ts-ignore': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
+        '@typescript-eslint/ban-types': 'off',
     },
 };
