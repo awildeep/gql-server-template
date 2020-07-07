@@ -1,12 +1,12 @@
-import { Query, Resolver} from "type-graphql";
-import { Status } from "../../Entity/Status"
+import { Query, Resolver } from 'type-graphql';
+import { Status } from '../../Entity/Status';
 
 @Resolver()
 class StatusResolver {
-    @Query(() => Status, {name: 'status'})
-    async Status() {
+    @Query(() => Status, { name: 'status' })
+    async Status(): Promise<{ up: string }> {
         return {
-            up: true
+            up: true,
         };
     }
 }

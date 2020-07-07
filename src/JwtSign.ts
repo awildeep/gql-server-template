@@ -1,18 +1,18 @@
 import jwt from 'jsonwebtoken';
-import {User} from "./Entity/User";
-import EnvironmentConfig from "./EnvironmentConfig";
+import { User } from './Entity/User';
+import EnvironmentConfig from './EnvironmentConfig';
 
 export interface Jwt {
-    expiresIn: string,
-    type: string,
-    userId: number,
+    expiresIn: string;
+    type: string;
+    userId: number;
 }
 
-export const JwtSign = (user: User, type: string, exp: string) => {
+export const JwtSign = (user: User, type: string, exp: string): string => {
     return jwt.sign(
         {
             type,
-            ...user
+            ...user,
         },
         EnvironmentConfig.JWT_SECRET,
         {
@@ -20,6 +20,6 @@ export const JwtSign = (user: User, type: string, exp: string) => {
             notBefore: 0,
             expiresIn: exp,
             issuer: EnvironmentConfig.JWT_ISSUER,
-        }
-    )
+        },
+    );
 };

@@ -1,14 +1,14 @@
-import "reflect-metadata";
-import {ApolloServer} from 'apollo-server-express';
+import 'reflect-metadata';
+import { ApolloServer } from 'apollo-server-express';
 import Express from 'express';
 // import { useSofa, OpenAPI } from 'sofa-api';
-import {createConnection} from "typeorm";
-import cors from "cors";
-import EnvironmentConfig from "./EnvironmentConfig";
-import jwt from "express-jwt";
-import {buildSchema} from "type-graphql";
-import Resolvers from "./Resolvers";
-import CustomAuthChecker from "./CustomAuthChecker";
+import { createConnection } from 'typeorm';
+import cors from 'cors';
+import EnvironmentConfig from './EnvironmentConfig';
+import jwt from 'express-jwt';
+import { buildSchema } from 'type-graphql';
+import Resolvers from './Resolvers';
+import CustomAuthChecker from './CustomAuthChecker';
 import jsonwebtoken from 'jsonwebtoken';
 
 const graphqlEndpoint = '/graphql';
@@ -18,8 +18,8 @@ const main = async () => {
     const connection = await createConnection();
     const schema = await buildSchema({
         resolvers: Resolvers,
-        authChecker: CustomAuthChecker
-    })
+        authChecker: CustomAuthChecker,
+    });
 
     const app = Express();
     app.use(
@@ -32,19 +32,23 @@ const main = async () => {
         }),
     );
 
-    const contextFunction = async ({req}: any ) => {
+    const contextFunction = async ({ req }: any) => {
         // console.log({authorization: req.headers.authorization})
         let decoded = {};
         if (req.headers.authorization) {
-            decoded = jsonwebtoken.verify(req.headers.authorization.replace('Bearer ', ''), EnvironmentConfig.JWT_SECRET, { algorithms: ['RS256'] });
+            decoded = jsonwebtoken.verify(
+                req.headers.authorization.replace('Bearer ', ''),
+                EnvironmentConfig.JWT_SECRET,
+                { algorithms: ['RS256'] },
+            );
         }
 
         return {
             req,
             user: decoded,
-            connection
-        }
-    }
+            connection,
+        };
+    };
 
     // app.use(restEndpoint,
     //     useSofa({
@@ -52,17 +56,16 @@ const main = async () => {
     //         context: contextFunction,
     //     }));
 
-
     app.use(
         cors({
             credentials: true,
             origin: EnvironmentConfig.CORS_DOMAIN,
-        })
+        }),
     );
 
     const apolloServer = new ApolloServer({
         schema,
-        context: contextFunction
+        context: contextFunction,
     });
 
     // Apply the GraphQL server middleware
@@ -71,17 +74,19 @@ const main = async () => {
     app.listen(EnvironmentConfig.PORT, () => {
         const envKeys = Object.keys(EnvironmentConfig);
 
-        envKeys.forEach(envKey => {
+        envKeys.forEach((envKey) => {
             if (!['JWT_SECRET', 'SERVICE_PASSWORD', 'SMTP_PASSWORD'].includes(envKey)) {
-                // @ts-ignore
-                console.log(`⚙️  ${envKey} set to '${EnvironmentConfig[envKey]}'`);
+                if (envKey in EnvironmentConfig) {
+                    console.log(`⚙️  ${envKey} set to '${EnvironmentConfig[envKey]}'`);
+                }
             }
         });
 
-        console.log(`🚀 Server ready at ${EnvironmentConfig.CORS_DOMAIN}:${EnvironmentConfig.PORT}${apolloServer.graphqlPath}`);
+        console.log(
+            `🚀 Server ready at ${EnvironmentConfig.CORS_DOMAIN}:${EnvironmentConfig.PORT}${apolloServer.graphqlPath}`,
+        );
         // or ${EnvironmentConfig.CORS_DOMAIN}:${EnvironmentConfig.PORT}${restEndpoint}`);
-    })
+    });
 };
-
 
 main();

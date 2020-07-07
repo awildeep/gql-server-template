@@ -1,9 +1,9 @@
-import {ObjectType, Field} from "type-graphql";
-import {User} from "./User";
+import { ObjectType, Field } from 'type-graphql';
+import { User } from './User';
 
 @ObjectType()
 export class Token {
-    @Field(()=> User)
+    @Field(() => User)
     user: User;
 
     @Field()

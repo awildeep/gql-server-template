@@ -33,4 +33,4 @@ loadFixtures('./src/fixtures')
     .then(() => {
         console.log('Fixtures are successfully loaded.');
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));

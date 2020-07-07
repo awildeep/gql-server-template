@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { Builder, fixturesIterator, Loader, Parser, Resolver } from 'typeorm-fixtures-cli/dist';
 import { getRepository } from 'typeorm';
-import {TestConn} from "./TestConn";
+import { TestConn } from './TestConn';
 
 const loadFixtures = async (fixturesPath: string) => {
     let connection;
@@ -28,8 +28,8 @@ const loadFixtures = async (fixturesPath: string) => {
     }
 };
 
-loadFixtures(__dirname+'/../fixtures')
+loadFixtures(__dirname + '/../fixtures')
     .then(() => {
         console.log('Fixtures are successfully loaded.');
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));

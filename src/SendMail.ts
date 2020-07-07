@@ -1,15 +1,15 @@
 import nodemailer from 'nodemailer';
-import EnvironmentConfig from "./EnvironmentConfig";
+import EnvironmentConfig from './EnvironmentConfig';
 
 export interface MailOptions {
-    from: string,
-    to: string,
-    subject: string,
-    text: string,
-    html: string,
+    from: string;
+    to: string;
+    subject: string;
+    text: string;
+    html: string;
 }
 
-export async function SendMail(mailOptions: MailOptions) {
+export async function SendMail(mailOptions: MailOptions): Promise<void> {
     let smtpUsername = EnvironmentConfig.SMTP_USERNAME;
     let smtpPassword = EnvironmentConfig.SMTP_PASSWORD;
 
@@ -25,8 +25,8 @@ export async function SendMail(mailOptions: MailOptions) {
         secure: EnvironmentConfig.SMTP_IS_SECURE,
         auth: {
             user: smtpUsername,
-            pass: smtpPassword
-        }
+            pass: smtpPassword,
+        },
     });
 
     // send mail with defined transport object
@@ -34,5 +34,4 @@ export async function SendMail(mailOptions: MailOptions) {
 
     console.log('Message sent: %s', info.messageId);
     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
 }

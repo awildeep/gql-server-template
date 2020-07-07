@@ -1,6 +1,6 @@
-import { MinLength} from "class-validator";
-import { Field, InputType} from "type-graphql";
-import {isRoleUsed} from "../Validate/isRoleUsed";
+import { MinLength } from 'class-validator';
+import { Field, InputType } from 'type-graphql';
+import { isRoleUsed } from '../Validate/isRoleUsed';
 
 @InputType()
 export class RoleEditInput {
@@ -9,6 +9,6 @@ export class RoleEditInput {
 
     @Field()
     @MinLength(3)
-    @isRoleUsed({message: "Role already in use"})
+    @isRoleUsed({ message: 'Role already in use' })
     name: string;
 }
