@@ -1,22 +1,14 @@
-import {Arg, Authorized, Mutation, Resolver} from "type-graphql";
-import bcrypt from "bcryptjs";
-import {User} from "../../Entity/User";
-import {UserEditInput} from "./Input/UserEditInput";
+import { Arg, Authorized, Mutation, Resolver } from 'type-graphql';
+import bcrypt from 'bcryptjs';
+import { User } from '../../Entity/User';
+import { UserEditInput } from './Input/UserEditInput';
 
 @Resolver()
 class UserEditResolver {
-    @Authorized(['Admin'])
-    @Mutation(()=>User)
+    @Authorized(['Admin', 'Approved'])
+    @Mutation(() => User)
     async UserEdit(
-        @Arg('input') {
-            userId,
-            firstName,
-            lastName,
-            email,
-            password,
-            isActive
-        }: UserEditInput,
-
+        @Arg('input') { userId, firstName, lastName, email, password, isActive }: UserEditInput,
     ): Promise<User> {
         const user = await User.findOneOrFail(userId);
 

@@ -10,3 +10,5 @@ dist/
 *.key
 *.log
 ormconfig.json
+*.pem
+swagger.yml

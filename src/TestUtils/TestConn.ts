@@ -1,16 +1,17 @@
-import {createConnection} from "typeorm";
+import { createConnection } from 'typeorm';
+import { Connection } from 'typeorm/connection/Connection';
 
-export const TestConn = (drop: boolean = false) => {
+export const TestConn = (drop = false): Promise<Connection> => {
     return createConnection({
-        name: "default",
-        type: "postgres",
-        host: "localhost",
+        name: 'default',
+        type: 'postgres',
+        host: 'localhost',
         port: 5432,
-        username: "gsm",
-        password: "",
-        database: "typegraphql-testing",
+        username: 'gsm',
+        password: '',
+        database: 'typegraphql-testing',
         synchronize: drop,
         dropSchema: drop,
-        entities: [__dirname+ "/../Entity/*.*"]
-    })
+        entities: [__dirname + '/../Entity/*.*'],
+    });
 };

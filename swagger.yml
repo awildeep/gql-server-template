@@ -1,0 +1,554 @@
+openapi: 3.0.0
+info:
+    title: 'API Doc'
+    version: 1.0.0
+paths:
+    /api/hello-world:
+        get:
+            operationId: helloWorldQuery
+            parameters: []
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+    /api/me:
+        get:
+            operationId: meQuery
+            parameters: []
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+    /api/role-list:
+        get:
+            operationId: roleListQuery
+            parameters:
+                -
+                    in: query
+                    name: input
+                    required: true
+                    schema:
+                        $ref: '#/components/schemas/PaginationInput'
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Role'
+    /api/my-roles:
+        get:
+            operationId: myRolesQuery
+            parameters: []
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/UserRole'
+    /api/user-list:
+        get:
+            operationId: userListQuery
+            parameters:
+                -
+                    in: query
+                    name: input
+                    required: true
+                    schema:
+                        $ref: '#/components/schemas/PaginationInput'
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/User'
+    /api/user-role-list:
+        get:
+            operationId: userRoleListQuery
+            parameters:
+                -
+                    in: query
+                    name: pagination
+                    required: true
+                    schema:
+                        $ref: '#/components/schemas/PaginationInput'
+                -
+                    in: query
+                    name: input
+                    required: true
+                    schema:
+                        $ref: '#/components/schemas/UserRoleListInput'
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/UserRole'
+    /api/echo:
+        get:
+            operationId: echoQuery
+            parameters:
+                -
+                    in: query
+                    name: input
+                    required: true
+                    schema:
+                        $ref: '#/components/schemas/EchoInput'
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+    /api/status:
+        get:
+            operationId: statusQuery
+            parameters: []
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/register:
+        post:
+            operationId: registerMutation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                input:
+                                    $ref: '#/components/schemas/RegisterInput'
+                            required:
+                                - input
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+    /api/login:
+        post:
+            operationId: loginMutation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                input:
+                                    $ref: '#/components/schemas/LoginInput'
+                            required:
+                                - input
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Token'
+    /api/refresh-token:
+        post:
+            operationId: refreshTokenMutation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                refreshToken:
+                                    $ref: '#/components/schemas/RefreshTokenInput'
+                            required:
+                                - refreshToken
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Token'
+    /api/role-create:
+        post:
+            operationId: roleCreateMutation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                input:
+                                    $ref: '#/components/schemas/UserRoleDeleteInput'
+                            required:
+                                - input
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserRole'
+    /api/profile-edit:
+        post:
+            operationId: profileEditMutation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                input:
+                                    $ref: '#/components/schemas/ProfileEditInput'
+                            required:
+                                - input
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+    /api/user-edit:
+        post:
+            operationId: userEditMutation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                input:
+                                    $ref: '#/components/schemas/UserEditInput'
+                            required:
+                                - input
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+    /api/confirm-user:
+        post:
+            operationId: confirmUserMutation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                token:
+                                    type: string
+                            required:
+                                - token
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: boolean
+    /api/confirm-resend:
+        post:
+            operationId: confirmResendMutation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                input:
+                                    type: string
+                            required:
+                                - input
+            responses:
+                '200':
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Token'
+components:
+    securitySchemes:
+        bearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
+    schemas:
+        Query:
+            type: object
+            required:
+                - helloWorld
+                - Echo
+                - status
+            properties:
+                helloWorld:
+                    type: string
+                Me:
+                    $ref: '#/components/schemas/User'
+                RoleList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Role'
+                MyRoles:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/UserRole'
+                UserList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/User'
+                UserRoleList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/UserRole'
+                Echo:
+                    type: string
+                status:
+                    $ref: '#/components/schemas/Status'
+        User:
+            type: object
+            required:
+                - userId
+                - firstName
+                - lastName
+                - name
+                - isActive
+                - email
+            properties:
+                userId:
+                    type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                name:
+                    type: string
+                isActive:
+                    type: boolean
+                email:
+                    type: string
+                userRoles:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/UserRole'
+        UserRole:
+            type: object
+            required:
+                - userRoleId
+                - user
+                - role
+            properties:
+                userRoleId:
+                    type: string
+                user:
+                    $ref: '#/components/schemas/User'
+                role:
+                    $ref: '#/components/schemas/Role'
+        Role:
+            type: object
+            required:
+                - roleId
+                - name
+            properties:
+                roleId:
+                    type: string
+                name:
+                    type: string
+                roleUsers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/UserRole'
+        PaginationInput:
+            type: object
+            properties:
+                skip:
+                    type: number
+                    format: float
+                take:
+                    type: number
+                    format: float
+        UserRoleListInput:
+            type: object
+            required:
+                - userId
+            properties:
+                userId:
+                    type: number
+                    format: float
+        EchoInput:
+            type: object
+            required:
+                - value
+            properties:
+                value:
+                    type: string
+        Status:
+            type: object
+            required:
+                - up
+            properties:
+                up:
+                    type: boolean
+        Mutation:
+            type: object
+            required:
+                - Register
+                - Login
+                - RefreshToken
+                - RoleCreate
+                - ProfileEdit
+                - UserEdit
+                - ConfirmUser
+                - ConfirmResend
+            properties:
+                Register:
+                    $ref: '#/components/schemas/User'
+                Login:
+                    $ref: '#/components/schemas/Token'
+                RefreshToken:
+                    $ref: '#/components/schemas/Token'
+                RoleCreate:
+                    $ref: '#/components/schemas/UserRole'
+                ProfileEdit:
+                    $ref: '#/components/schemas/User'
+                UserEdit:
+                    $ref: '#/components/schemas/User'
+                ConfirmUser:
+                    type: boolean
+                ConfirmResend:
+                    $ref: '#/components/schemas/Token'
+        RegisterInput:
+            type: object
+            required:
+                - firstName
+                - lastName
+                - email
+                - password
+            properties:
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+        LoginInput:
+            type: object
+            required:
+                - email
+                - password
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
+        Token:
+            type: object
+            required:
+                - user
+                - accessToken
+                - refreshToken
+            properties:
+                user:
+                    $ref: '#/components/schemas/User'
+                accessToken:
+                    type: string
+                refreshToken:
+                    type: string
+        RefreshTokenInput:
+            type: object
+            required:
+                - token
+            properties:
+                token:
+                    type: string
+        UserRoleDeleteInput:
+            type: object
+            required:
+                - userRoleId
+            properties:
+                userRoleId:
+                    type: number
+                    format: float
+        ProfileEditInput:
+            type: object
+            required:
+                - firstName
+                - lastName
+                - email
+            properties:
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+        UserEditInput:
+            type: object
+            required:
+                - userId
+                - firstName
+                - lastName
+                - email
+                - isActive
+            properties:
+                userId:
+                    type: number
+                    format: float
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+                isActive:
+                    type: boolean
+        RoleCreateInput:
+            type: object
+            required:
+                - name
+            properties:
+                name:
+                    type: string
+        UserRoleCreateInput:
+            type: object
+            required:
+                - userId
+                - roleId
+            properties:
+                userId:
+                    type: number
+                    format: float
+                roleId:
+                    type: number
+                    format: float
+security:
+    -
+        bearerAuth: []

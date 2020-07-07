@@ -1,11 +1,11 @@
-import {MailOptions} from "../SendMail";
+import { MailOptions } from '../SendMail';
 
-export const ForgotPasswordEmail = (to: string, from: string, targetUrl: string):MailOptions => {
+export const ForgotPasswordEmail = (to: string, from: string, targetUrl: string): MailOptions => {
     return {
         to: to,
         from: from,
         html: `<a href="${targetUrl}">${targetUrl}</a>`,
         text: `${targetUrl}`,
-        subject: `Change your password`
-    }
+        subject: `Change your password`,
+    };
 };

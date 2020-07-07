@@ -45,6 +45,10 @@ Create tables:
 Run fixtures (optional):
 
     yarn run fixtures
+    
+## build swagger yml
+
+    yarn run swagger:doc
 
 ## start in dev mode /w watcher
 

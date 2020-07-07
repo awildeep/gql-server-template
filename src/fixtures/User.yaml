@@ -2,29 +2,35 @@ entity: "User"
 items:
     user0:
         email: "awildeep+admin@gmail.com"
-        firstName: "Greg+admin"
+        firstName: "Greg admin"
         lastName: "Elliot"
         #         testing
         password: "$2a$12$EFDhqdght9ZVu1UmUdOeQOOcmEP8dDXMkh3VxtVO7yZfo3rNi85mm"
         isActive: true
+        confirmed: true
+        organization: "@org0"
     user1:
         email: "awildeep+approved@gmail.com"
-        firstName: "Greg+approved"
+        firstName: "Greg approved"
         lastName: "Elliot"
         #         testing
         password: "$2a$12$EFDhqdght9ZVu1UmUdOeQOOcmEP8dDXMkh3VxtVO7yZfo3rNi85mm"
         isActive: true
+        confirmed: true
+        organization: "@org0"
     user2:
         email: "awildeep+user@gmail.com"
-        firstName: "Greg+user"
+        firstName: "Greg user"
         lastName: "Elliot"
         #         testing
         password: "$2a$12$EFDhqdght9ZVu1UmUdOeQOOcmEP8dDXMkh3VxtVO7yZfo3rNi85mm"
         isActive: true
+        organization: "@org0"
     user3:
         email: "awildeep+inactive@gmail.com"
-        firstName: "Greg+user"
+        firstName: "Greg user"
         lastName: "Elliot"
         #         testing
         password: "$2a$12$EFDhqdght9ZVu1UmUdOeQOOcmEP8dDXMkh3VxtVO7yZfo3rNi85mm"
         isActive: false
+        organization: "@org0"
