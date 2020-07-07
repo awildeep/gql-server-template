@@ -7,7 +7,7 @@ import {Role} from "../../Entity/Role";
 @Resolver()
 class UserRoleCreateResolver {
 
-    @Authorized(['Admin'])
+    @Authorized(['Admin', 'Approved'])
     @Mutation(()=>UserRole)
     async RoleCreate(
         @Arg('input') {

@@ -8,15 +8,6 @@ export interface MailOptions {
     text: string,
     html: string,
 }
-/*
-{
-        from: '"Fred Foo 👻" <foo@example.com>', // sender address
-        to: 'bar@example.com, baz@example.com', // list of receivers
-        subject: 'Hello ✔', // Subject line
-        text: 'Hello world?', // plain text body
-        html: '<b>Hello world?</b>' // html body
-    }
- */
 
 export async function SendMail(mailOptions: MailOptions) {
     let smtpUsername = EnvironmentConfig.SMTP_USERNAME;

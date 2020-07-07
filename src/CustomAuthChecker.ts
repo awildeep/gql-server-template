@@ -4,7 +4,7 @@ import {Role} from "./Entity/Role";
 
 const CustomAuthChecker: AuthChecker<any> =
     async ({ context }, roles) => {
-        console.log('CustomAuthChecker', context.user)
+        //console.log('CustomAuthChecker', context.user)
         if (!context.user || !context.user.userId) {
             console.log('Access denied user or userId not found:', context.user);
             return false;

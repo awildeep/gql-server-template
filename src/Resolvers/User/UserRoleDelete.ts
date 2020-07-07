@@ -6,7 +6,7 @@ import {UserRoleDeleteInput} from "./Input/UserRoleDeleteInput";
 @Resolver()
 class UserRoleDeleteResolver {
 
-    @Authorized(['Admin'])
+    @Authorized(['Admin', 'Approved'])
     @Mutation(()=>UserRole)
     async RoleCreate(
         @Arg('input') {

@@ -209,46 +209,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/UserRole'
-    /api/role-delete:
-        post:
-            operationId: roleDeleteMutation
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                input:
-                                    $ref: '#/components/schemas/RoleDeleteInput'
-                            required:
-                                - input
-            responses:
-                '200':
-                    description: ""
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Role'
-    /api/role-edit:
-        post:
-            operationId: roleEditMutation
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                input:
-                                    $ref: '#/components/schemas/RoleEditInput'
-                            required:
-                                - input
-            responses:
-                '200':
-                    description: ""
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Role'
     /api/profile-edit:
         post:
             operationId: profileEditMutation
@@ -330,6 +290,11 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/Token'
 components:
+    securitySchemes:
+        bearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
     schemas:
         Query:
             type: object
@@ -453,8 +418,6 @@ components:
                 - Login
                 - RefreshToken
                 - RoleCreate
-                - RoleDelete
-                - RoleEdit
                 - ProfileEdit
                 - UserEdit
                 - ConfirmUser
@@ -468,10 +431,6 @@ components:
                     $ref: '#/components/schemas/Token'
                 RoleCreate:
                     $ref: '#/components/schemas/UserRole'
-                RoleDelete:
-                    $ref: '#/components/schemas/Role'
-                RoleEdit:
-                    $ref: '#/components/schemas/Role'
                 ProfileEdit:
                     $ref: '#/components/schemas/User'
                 UserEdit:
@@ -534,25 +493,6 @@ components:
                 userRoleId:
                     type: number
                     format: float
-        RoleDeleteInput:
-            type: object
-            required:
-                - roleId
-            properties:
-                roleId:
-                    type: number
-                    format: float
-        RoleEditInput:
-            type: object
-            required:
-                - roleId
-                - name
-            properties:
-                roleId:
-                    type: number
-                    format: float
-                name:
-                    type: string
         ProfileEditInput:
             type: object
             required:
@@ -609,3 +549,6 @@ components:
                 roleId:
                     type: number
                     format: float
+security:
+    -
+        bearerAuth: []

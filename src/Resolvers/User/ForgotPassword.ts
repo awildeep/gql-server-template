@@ -16,7 +16,7 @@ class ForgotPasswordResolver {
         await SendMail(ForgotPasswordEmail(
             email,
             'testmailer@test.com',
-            CreateConfirmationUrl(user, 'user/forgot-password')
+            await CreateConfirmationUrl(user, 'user/forgot-password')
         ));
 
         return true;

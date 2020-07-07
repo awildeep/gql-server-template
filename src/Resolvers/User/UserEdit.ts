@@ -5,7 +5,7 @@ import {UserEditInput} from "./Input/UserEditInput";
 
 @Resolver()
 class UserEditResolver {
-    @Authorized(['Admin'])
+    @Authorized(['Admin', 'Approved'])
     @Mutation(()=>User)
     async UserEdit(
         @Arg('input') {

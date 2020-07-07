@@ -5,7 +5,7 @@ import {UserRole} from "../../Entity/UserRole";
 
 @Resolver()
 class UserRoleListResolver {
-    @Authorized(['User'])
+    @Authorized(['User', 'Approved'])
     @Query(()=>[UserRole], {nullable: true})
     async UserRoleList(
         @Arg('input') {

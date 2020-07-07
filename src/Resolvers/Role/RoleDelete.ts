@@ -5,7 +5,7 @@ import {Role} from "../../Entity/Role";
 @Resolver()
 class RoleDeleteResolver {
 
-    @Authorized(['Admin'])
+    @Authorized(['Admin', 'Approved'])
     @Mutation(()=>Role)
     async RoleDelete(
         @Arg('input') {

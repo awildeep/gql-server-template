@@ -5,7 +5,7 @@ import {Role} from "../../Entity/Role";
 @Resolver()
 class RoleEditResolver {
 
-    @Authorized(['Admin'])
+    @Authorized(['Admin', 'Approved'])
     @Mutation(()=>Role)
     async RoleEdit(
         @Arg('input') {

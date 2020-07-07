@@ -4,7 +4,7 @@ import {PaginationInput} from "../Validate/PaginationInput";
 
 @Resolver()
 class RoleListResolver {
-    @Authorized(['User'])
+    @Authorized(['User', 'Approved'])
     @Query(()=>[Role], {nullable: true})
     async RoleList(
         @Arg('input') {

@@ -6,7 +6,7 @@ import {MyContextType} from "../../Types/MyContextType";
 
 @Resolver()
 class ProfileEditResolver {
-    @Authorized(['User'])
+    @Authorized(['User', 'Approved'])
     @Mutation(()=>User)
     async ProfileEdit(
         @Arg('input') {
@@ -17,7 +17,7 @@ class ProfileEditResolver {
         }: ProfileEditInput,
         @Ctx() ctx: MyContextType
     ): Promise<User> {
-        const user = await User.findOneOrFail(ctx.req.session!.userId);
+        const user = await User.findOneOrFail(ctx.user.userId);
 
         if (password) {
             user.password = await bcrypt.hash(password, 12);

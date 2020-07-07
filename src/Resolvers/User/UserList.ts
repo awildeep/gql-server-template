@@ -4,7 +4,7 @@ import {User} from "../../Entity/User";
 
 @Resolver()
 class UserListResolver {
-    @Authorized(['User'])
+    @Authorized(['User', 'Approved'])
     @Query(()=>[User], {nullable: true})
     async UserList(
         @Arg('input') {

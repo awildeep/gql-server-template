@@ -1,6 +1,7 @@
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, JoinTable, OneToMany} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, JoinTable, OneToMany, ManyToOne, JoinColumn} from "typeorm";
 import {ObjectType, Field, ID, Root} from "type-graphql";
 import {UserRole} from "./UserRole";
+import {Organization} from "./Organization";
 import {Min} from "class-validator";
 
 @ObjectType()
@@ -42,6 +43,11 @@ export class User extends BaseEntity {
 
     @JoinTable()
     userRoles?:  UserRole[];
+
+    @Field(()=> User)
+    @ManyToOne(() => Organization, Organization => Organization.users)
+    @JoinColumn({ name: "organization_id"})
+    organization: Organization;
 
 
     @Column('bool', {default: false})
