@@ -1,4 +1,3 @@
-import { MyContextType } from './Types/MyContextType';
 import { AuthChecker } from 'type-graphql';
 import { Role } from './Entity/Role';
 

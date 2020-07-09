@@ -1,18 +1,15 @@
 import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server-express';
 import Express from 'express';
-// import { useSofa, OpenAPI } from 'sofa-api';
 import { createConnection } from 'typeorm';
 import cors from 'cors';
 import EnvironmentConfig from './EnvironmentConfig';
-import jwt from 'express-jwt';
 import { buildSchema } from 'type-graphql';
 import Resolvers from './Resolvers';
 import CustomAuthChecker from './CustomAuthChecker';
-import jsonwebtoken from 'jsonwebtoken';
+import jsonwebtoken, { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 
 const graphqlEndpoint = '/graphql';
-// const restEndpoint = '/api';
 
 const main = async () => {
     const connection = await createConnection();
@@ -22,25 +19,26 @@ const main = async () => {
     });
 
     const app = Express();
-    app.use(
-        graphqlEndpoint,
-        jwt({
-            secret: EnvironmentConfig.JWT_SECRET,
-            credentialsRequired: false,
-            algorithms: ['RS256'],
-            requestProperty: 'jwtToken',
-        }),
-    );
 
     const contextFunction = async ({ req }: any) => {
-        // console.log({authorization: req.headers.authorization})
         let decoded = {};
         if (req.headers.authorization) {
-            decoded = jsonwebtoken.verify(
-                req.headers.authorization.replace('Bearer ', ''),
-                EnvironmentConfig.JWT_SECRET,
-                { algorithms: ['RS256'] },
-            );
+            try {
+                decoded = jsonwebtoken.verify(
+                    req.headers.authorization.replace('Bearer ', ''),
+                    EnvironmentConfig.JWT_SECRET,
+                    { algorithms: ['RS256'] },
+                );
+            } catch (err) {
+                if (err instanceof TokenExpiredError) {
+                    throw new Error(`jwt is expired, try to refresh your token via 'mutation RefreshToken'`);
+                } else if (err instanceof JsonWebTokenError) {
+                    throw new Error(`jwt must be provided via the 'authorization' header`);
+                } else {
+                    console.log(err);
+                    throw new Error(`JWT error, is your JWT correctly formed?`);
+                }
+            }
         }
 
         return {
@@ -49,12 +47,6 @@ const main = async () => {
             connection,
         };
     };
-
-    // app.use(restEndpoint,
-    //     useSofa({
-    //         schema,
-    //         context: contextFunction,
-    //     }));
 
     app.use(
         cors({
