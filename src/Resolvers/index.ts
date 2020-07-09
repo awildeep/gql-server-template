@@ -18,8 +18,9 @@ import EchoResolver from './Echo/Echo';
 import ConfirmUserResolver from './User/ConfirmUser';
 import ConfirmResendResolver from './User/ConfirmResend';
 import StatusResolver from './Status/Status';
+import { NonEmptyArray } from 'type-graphql/dist/interfaces/NonEmptyArray';
 
-const Resolvers = [
+const Resolvers: NonEmptyArray<Function> | NonEmptyArray<string> = [
     ConfirmUserResolver,
     ConfirmResendResolver,
     EchoResolver,

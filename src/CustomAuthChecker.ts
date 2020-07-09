@@ -22,9 +22,10 @@ const CustomAuthChecker: AuthChecker<any> = async ({ context }, roles) => {
         if (!assignedRoles.includes(roles[i])) {
             console.log('Access denied role not found:', roles[i]);
             return false;
-        } else {
-            console.log('Access granted for role:', roles[i]);
         }
+        // else {
+        //     console.log('Access granted for role:', roles[i]);
+        // }
     }
 
     return true;
